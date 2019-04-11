@@ -1,0 +1,182 @@
+Funciones de grupo: count(campo(, max(campo), min(campo), avg(campo), sum(campo)
+select c1, ..., cn-1, fx(cn) FROM tx GROUP BY c1,...., cn-1
+
+Ejemplo: SELECT max(salary) from ....
+
+	SELECT count (employee_id) FROM Tabla
+
+
+
+select departamento_id, max(salary) from empleados GROUP BY departamento_id
+
+((Agrupar siempre con GROUP BY))
+
+
+
+- having condition -----> Poner condiciones sobre la función de grupo, ya que dicha condicion no
+se puede establecer en la clausula where. SOLO PARA FUNCIONES DE GRUPO
+
+
+---->>>Ejemplo: Muestra la suma de salario por departamento, siempre que dicha
+		suma sea superior a un valor.
+
+
+
+ 
+- ORDER BY ----> Ordenar los datos, por defecto ascendente, sino order by cx. Por nombre de campo o
+posición. 
+		
+
+
+
+
+FUNCIONES NUMÉRICAS
+
+- abs---> Valor absoluto
+- sqrt ---> Raíz cuadrada
+- ceiling(x) ----> entero superior mas próximo al valor x 
+- floor(x) ----> entero inferior más próximo al valor x
+- round(x,x) ----> Redondear
+- trunc (x,x) ----> Parte entera
+- greatest (1,2,3,4) ----> Devuelve el valor mayor
+- least (1,2,3,4) ----> Devuelve el valor menor
+- mod (x,m) -----> Devuelve el resto de la división
+- sign (x) ------> Devuelve -1 si es negativo y 1 si es positivo y 0 si el número es 0
+
+
+
+
+FUNCIONES CARACTERES
+
+- concat ---->concatenar caractares ( con , o || )
+- substr (n, m) -----> extrae desde n, los m siguientes.
+- instr (campoy, 'cadenax', n, m) ----> Devuelve la posicion de la m ocurrencia de la cadena x, dentro
+del campo y comenzando por n.
+- length (cadena) ----> longitud de la cadena
+- upper ----> convierte a mayúscula
+- lower ----> convierte a minúsculas
+- lpad (cadena, long, cadena2) ----> Añade por la izquierda la cadena 2 a la cadena1
+hasta alcanzar la longitud.
+- rpad ----> lo mismo pero añade a la derecha
+- ltrim (cadena1,cadena2) ----> Devuelve la cadena1, eliminando por su izquierda los
+caracteres que contiene la cadena 1. tambien puede eliminar los espacios en blanco: 
+('   almeria')
+
+- rtrim ----> igual pero por la derecha
+- replace (cadena1, cadena2) ---> Reemplazas la cadena2, por la cadena1) 
+replace ('almeria', 'a', 'x') reemplazas en almeria, las a por las x-->xlmerix
+
+FUNCIONES DE FECHAS
+
+- las fechas se pueden restar, la diferencia sería el número de días.
+
+- SYSDATE---> Fecha del sistema en el formato por defecto
+- MONTHS_BETWEEN (FECHA1, FECHA2) ----> devuelve el numero de meses entre las fechas
+- extract(year | month| day )----> extraer una de esas opciones --->
+select extract ( year from sysdate ) from dual ---> 2019
+
+
+
+
+
+FUNCIONES DE CONVERSIÓN
+
+- to_number ('4') ----> Devuelve un número a partir de una cadena de caracteres
+- to_date  ('fecha', 'fmt') -----> convertir a fecha
+- to_char ----> recibe una fecha y nos devuelve una cadena de caracteres en el formato qu eligas
+		dia----> d (1-31) dd (1-365) day
+		mes----> mm (1-12) mon (3 primeras letras del mes) month (nombre del mes
+		año----> yyyy yy year(año en letra)
+		siglo--> cc
+		horas--> hh24 hhpm hham
+		minutos---> mi (2digitos: 1-60)  
+		segundos--> ss (2digitos)
+
+
+
+
+OTRAS FUNCIONES
+
+-  nvl(campo, valor) -----> Comprobar si es nulo. Campo y valor tiene que ser del mismo tipo.
+-  decode ( campo, 'v1, dv1,v2,dv2,.....vn,dvn[dotro])----> busca la primera coincidencia de la
+primera cadena v, dentro del campo, devolviendo el correspondiente dvsx asociado. 
+si no hay coincidencia devuelve el valor de otro, que al ser opcional, puede no devolver nada.
+
+- case campo 
+	when v1 then dv1
+	when v2 then dv2
+	-----------
+	when vn then dvn
+	[else dotro]
+   end case
+
+
+
+
+------>>>> Donde se utilizan las funcione ----------->>>>>
+
+select fx(campo)
+from tx
+where fy (campo)
+
+
+
+
+
+BORRADO DE DATOS
+
+- delete from tx [where condition]
+
+
+MODIFICACIÓN DE DATOS
+
+- update tx set c1=v1, ...,cd = vn [where condition]  Puede ser un valor estático u otro dato de esa tabla.
+
+
+
+INSERCIÓN
+
+- insert into tx [(c1, ..., cn]) values (v1. v2...., vn)
+- insert into tx [(c1, ..., cn]) select x1, ..., xn from ty...
+
+
+
+TRANSACCIÓN----> Cambio en los datos y pendiente de ser confirmada o revocada.
+		Mientras no es confirmada el cambio en los datos solo es visible por la sesión de 
+		base de datos del usuario que la genera.
+		
+	
+		- commit ---> confirma la transacción.
+		- rollback ---> deshace la transacción.
+		- savepoint ---> hace commit hasta una marca.
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
