@@ -1,4 +1,4 @@
-Funciones de grupo: count(campo(, max(campo), min(campo), avg(campo), sum(campo)
+bFunciones de grupo: count(campo(, max(campo), min(campo), avg(campo), sum(campo)
 select c1, ..., cn-1, fx(cn) FROM tx GROUP BY c1,...., cn-1
 
 Ejemplo: SELECT max(salary) from ....
@@ -10,6 +10,7 @@ Ejemplo: SELECT max(salary) from ....
 select departamento_id, max(salary) from empleados GROUP BY departamento_id
 
 ((Agrupar siempre con GROUP BY))
+
 
 
 
@@ -126,6 +127,7 @@ where fy (campo)
 BORRADO DE DATOS
 
 - delete from tx [where condition]
+- truncate table tx ---> Borra todo el contenido de una tabla. No se puede deshacer.
 
 
 MODIFICACIÓN DE DATOS
@@ -146,14 +148,98 @@ TRANSACCIÓN----> Cambio en los datos y pendiente de ser confirmada o revocada.
 		base de datos del usuario que la genera.
 		
 	
-		- commit ---> confirma la transacción.
+		- commit ---> confirma la transacción. ((( solo para delete, update)) 
 		- rollback ---> deshace la transacción.
 		- savepoint ---> hace commit hasta una marca.
+
 		
 
 
 
 
+CREACIÓN DE TABLAS
+
+- create table tx 
+  (c1 tipo_dato [restriccion*],
+   c2 tipo_dato [restriccion],
+  -----------
+   cn tipo_dato [restriccion],
+   [, constraint name primary key  (c1,...cx)]
+   [, constraint name2 foreign key  (c1,...ca)] references ty (x1, ...,xa)]
+
+
+
+
+*TIPO DE RESTRICCIONES
+
+- not null ---> No puede ser nulo
+- primary key ---> Los datos de esa columnan identificados de forma única/ No puede tener null
+- unique ----> Registro único pero si puede tener valor null.
+- check ( campo operador valor ) ---> Restringir el conjunto de valores que hay en ese campo.
+- references ty (cx) ---> Referencia un campo de otra tabla.
+
+---->>>>Ejemplo----->>>>
+
+
+create table alumno(
+dni varchar2(10) primary key,
+nombre varchar2(30) not null,
+edad number (3) not null,
+edad number(3) not null,
+sexo varchar2(1) check ( sexo in ('v', 'h'))
+
+
+
+----->>>>>Ejemplo------>>>>
+
+create table notas(
+dni varchar2(10) not null,
+asignatura varchar2(20) not null,
+nota number (3,1) not null,
+constraint pk_notas primary key (dni, asignatura))
+
+(((Primary key formada por dos campos )))))
+
+
+create table notas(
+dni varchar2(10) not null,
+asignatura varchar2(20) not null,
+nota number (3,1) not null,
+constraint pk_notas primary key (dni, asignatura),
+constraint fk_dni foreign key (dni) references alumno(dni))
+
+
+
+
+BORRADO DE TABLAS
+
+- drop table tx;
+
+MODIFICAR ESTRUCTURAS DE TABLAS
+UP(
+- alter table tx add column ( nombre tipo_dato [restriccion])
+- alter table tx drop column name
+alter table tx add primary key ( c1, ..., cx)
+alter table tx drop primary key
+alter table drop constraint name
+alter table disable | enable constraint name----> Desactiva o activa esa constraint
+
+
+
+
+
+----------------->>>>>> EJERCICIOS ---------------->>>>>>>>>
+
+
+1. Media de salario por cargo (job), teniendo en cuenta los empleados con salario > 4000
+Y siempre que la media sea superior a 5000 mil euros.
+
+
+2. Las 3 primeras iniciales del nombre de los empleados junto con el número de años
+enteros que llevan en la empresa, ordenando en descendente por este último dato.
+
+3. Nombre del empleado, el año que ingresó en la empresa y su salario y comisión incrementado
+en un 20%, para los empleados de los departamentos 10, 20 y 50.
 
 
 
@@ -163,20 +249,114 @@ TRANSACCIÓN----> Cambio en los datos y pendiente de ser confirmada o revocada.
 
 
 
+OPERADORES DE CONJUNTOS
+
+
+- union ---> Devuelve los elementos de los conjuntos, pero los repetidos solo una vez. Los campos
+	que se unen deben de ser del mismo tipo. 
+
+- union all ---> Devuelve todos los elementos de los conjuntos, inclusive los repetidos.
+
+- interset ---> Devuelve los elementos comunes.
+
+- minus ---> Devuelve los elementos del primero conjunto que no están en el segundo. No tiene propiedad conmutativa.
+
+
+select c1, c2 from tx select union c3, c4 from ty
+
+
+
+
+
+INNER JOIN--->> uNION DE DOS O MAS TABLAS CON UN CAMPO EN COMUN, CON EL OBJETIVO DE:
+
+	- Mostrar datos de ambas tablas.
+	- Mostrar datos de una de ellas, pero evaluando condiciones sobres ambas tablas
+
+
+select [ti] c1, .... [th] cn..., [t2] n,..., [t2.] ax
+from t1, t2
+where [t1] ca 0 [t2] cb....
+
+
+
+OUTER JOIN--->> CUANDO SE MUESTRAN LOS ELEMENTOS NO COINCIDENTES DE AMBAS TABLAS Y ADICIONALMENTE
+		MOSTRAMOS EL RESTO DE LOS REGISTROS.
+
+
+		select [ti] c1, .... [th] cn..., [t2] n,..., [t2.] ax
+		froim t1, t2
+		where [t1] ca 0 [t2] cb (+)
+
+
+SIMBOLO + ENTRE PARENTESIS EN LA CONDICION ACOMPAÑANDO AL CAMPO QUE VA AL LADO CONTRARIO
+DEL CAMPO QUE REPRESENTA EL OBJETO QUE QUIERO ESPANDIR 
+
+
+
+------------------->>>> INNER JOIN <<<<<<--------------------
+
+SELECT TX.*, TY.* FROM TX JOIN TY ON (TY.CA = TY.CB) [WHERE.....] ((Con dos tablas))
+
+
+SELECT TX.*, TY.* FROM TX JOIN TY ON (TY.CA = TY.CB) 
+JOIN TZ ON (TY.CS = TZ.CH)  [WHERE.....]                   ((con tres tablas))
+
+
+
+
+
+------------------->>>> NATURAL JOIN <<<<<<--------------------
+
+- Unir dos tablas por los campos que tienen igual nombre
+- Se puede explicitar por que cmapos quiero unir con la cláusula  using 
+
+
+SELECT TX.*, TY.* 
+FROM TX NATURAL JOIN TY 
+ [WHERE.....] ((Con dos tablas))
+
+
+
+SELECT TX.*, TY.* 
+FROM TX NATURAL JOIN TY using (c1,...cx)
+ [WHERE.....]
+
+
+
+
+------------------->>>> OTHER JOIN <<<<<<--------------------
+
+
+- left join ---> amplio la tabla que está a la izquierda de la sintaxis.
+
+		
+SELECT TX.*, TY.* 
+FROM TX left join ty on (tx.ca = ty.cn)
+
+
+
+- right join ---> amplio la tabla que está a la izquierda de la sintaxis.
+
+
+SELECT TX.*, TY.* 
+FROM TX left join ty on (tx.ca = ty.cn)
+
+
+
+
+- full join ----> Devuelve los elementos que coincide, los de una y los de otra.
+
+
+SELECT TX.*, TY.* 
+FROM TX full join ty on (tx.ca = ty.cn)
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
+//// sE LE PUEDEN PONER ALIAS A LAS TABLAS HR.EMPLOYEES E
+---- E.EMPLOYEES_ID
 
 
