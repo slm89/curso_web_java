@@ -360,3 +360,42 @@ FROM TX full join ty on (tx.ca = ty.cn)
 ---- E.EMPLOYEES_ID
 
 
+
+
+
+
+
+
+SUBCONSULTAS
+
+Consultas dentro de otras consultas
+
+select * from tx where campo operador (select cy from ty....)
+
+- Cuando la subconsulta devuelve 1 o 0 registros, solo se puede utiliar
+los operadores de comparación : == <= 0= != in like
+
+- si devuelve n registros, utilizar el in, >any,  >all
+- en el select de la subconsulta solo puedes meter tantos campos como
+has pedido en el where y tienen que ser del mismo tipo.
+
+
+
+- OPERADOR EXITS-----> WHERE EXISTS ( SUBCONSULTA) sOLO EVALUA SI DEVUELVE ALGO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
