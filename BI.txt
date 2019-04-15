@@ -1,0 +1,59 @@
+Business Intelligence
+
+
+
+
+
+
+INFORMACIÓN TÉCNICO/OPERATIVA
+
+- Usada por el personal técnico y operativo ( funcionamiento del negocio)
+- Usada en sistemas transaccionales.
+
+
+INFORMACIÓN TÁCTICA
+
+- directivos medios
+
+INFORMACIÇON ESTRATÇEGICA
+
+- altos directivos. Líneas estrategicas
+
+
+-----> A los datos, le  sumas inteligencia a través del conocimiento.
+
+
+La información que se quiere investigar puede provenir de bases de datos y otras fuentes.
+
+
+
+DATA WAREHOUSE
+
+- almacén de datos es ahora el "sistema de información central" en todo este proceso.
+- almacén es una colección de datos.
+- sistema integrado.
+- variable en el tiempo, los datos se incrementan.
+- no volátil. los ddatos no se actualizan
+
+
+DATA MART
+
+- subconjunto de datos de un data werehouse por secciones
+- Menos informacion de detalles y mas información agragada.
+
+
+
+OLAP ( ONLINE ANALYTIC PROCESSING)
+
+
+DATAMINING
+
+- La tecnología, que permite analizar los datos, generando tendencias, para sacar conclusiones.
+- Extraer patrones y tenedencias para predecir comportamientos futuros.
+
+
+
+
+---->>Cargar los servidores
+
+---->> Repositorio: Almacén de datos de los metadatos
