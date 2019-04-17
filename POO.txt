@@ -1,0 +1,52 @@
+
+PROGRAMACIÓN ORIENTADO A OBJETOS
+
+
+-Tres propiedades:
+	-Encapsulación: ocultar propiedades y métodos.
+	-Herencia: Clases que heredan de otras adoptando las variables y métodos. No más de 7 niveles de jerarquía.
+	-Polimorfismo: un objeto puede tener múltiples formas, solo la de sus ascendientes.
+	-Interfaces: 
+
+- MÉTODOS (Casi siempre privados):
+
+	- privados (solo acceder desde esa clase), 
+	- protegidos (acceder desde la clase o clase heredada.  
+	- públicos (acceder desde cualquier clase), 
+	- amigas(acceder solo en ese paquete).
+
+- Paquetes Java
+
+- Clases
+	---> Variables miembro (siempre privadas)
+	---> Métodos
+
+
+
+
+
+
+
+	---> SubClases ( clases pequeñas)
+
+
+
+
+class Figura {
+
+	private int lados;
+	public int gotLados(){
+		return this.lados;
+	
+	}
+
+	 public void setLados(){
+		this.lados =
+	
+	}
+
+
+
+
+}
+
