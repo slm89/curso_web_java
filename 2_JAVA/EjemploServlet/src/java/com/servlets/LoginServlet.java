@@ -69,8 +69,7 @@ public class LoginServlet extends HttpServlet {
                 }else {
                     out.println("Error de login, email o contraseña inválidos"); 
                 }
-            
-
+                
             out.println("</body>");
             out.println("</html>");
   

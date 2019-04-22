@@ -80,8 +80,10 @@ public class RegistroServlet extends HttpServlet {
                 /*if (su == null)
                     su = new ServicioUsuarios();*/
                 su.addUsuario(nombre, iEdad, email, password);
+               
                 out.println("<h2>Usuario añadido. Total = "
                             + su.cantidadUsuarios() + "</h2>");
+               
             }
 
         }

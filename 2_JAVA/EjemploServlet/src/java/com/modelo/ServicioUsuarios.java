@@ -16,7 +16,9 @@ public class ServicioUsuarios {
     
     //Nadie puede hacer new salvo esta misma clase
     private ServicioUsuarios() {
-        listaUsuarios = new ArrayList<>();
+        //listaUsuarios = new ArrayList<>();
+        this.bdUsu = new DerbyDBUsuario();
+        this.listaUsuarios = bdUsu.listar();
     }
     
     //Unica manera de obtener un objeto en esta clase
@@ -27,12 +29,14 @@ public class ServicioUsuarios {
     }
     
     //Código de la clase
+    private DerbyDBUsuario bdUsu;
     private final ArrayList<Usuario> listaUsuarios;
 
    
     public boolean addUsuario(String nom, int edad, String email, String password){
         Usuario nuevoUsu = new Usuario(nom, edad, email, password);
         this.listaUsuarios.add(nuevoUsu);
+        this.bdUsu.crear(nuevoUsu);
         return true;
     }
     
