@@ -1,0 +1,40 @@
+ ARQUITECTURA EN TRES CAPAS
+
+
+
+
+CLIENTE                                            
+
+ -Parte con la que se comunica
+el usuario
+
+- WEB -->> HTML
+- HTML ---->>> GET/POST
+
+
+SERVIDOR                                      
+
+- Lógica de Negocio  
+- Servlet: Reciben los metodos http y devuelven un código (html, json...) a quien lo ha pedido.
+- JSP
+- Servicios Web : métodos o funciones que se utilizan en remoto.
+
+
+
+BBDD
+
+ - Modelo entidad Relación.                                                              
+ - CRUD (Insert, Create, Select, Read, Update, Delete)  
+
+
+
+
+
+
+
+
+MVC------->>> Patrón de diseño. Modelo Vista Controlador
+   ------->>> Modelo: Se compone de la lógica de negocio y la persistencia de datos.
+   ------->>> Vista: Código que genera
+   ------->>> Controlador: Enlaza el modelo con la vista
+                                                                                        
