@@ -22,6 +22,10 @@
         <servlet-name>borradoServlet</servlet-name>
         <servlet-class>com.servlets.borradoServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ModificarServlet</servlet-name>
+        <servlet-class>com.servlets.ModificarServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HolaServlet</servlet-name>
         <url-pattern>/hola</url-pattern>
@@ -41,5 +45,9 @@
     <servlet-mapping>
         <servlet-name>borradoServlet</servlet-name>
         <url-pattern>/borrar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ModificarServlet</servlet-name>
+        <url-pattern>/Modificar</url-pattern>
     </servlet-mapping>
 </web-app>
