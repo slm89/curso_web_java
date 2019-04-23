@@ -51,5 +51,14 @@ public class ServicioUsuarios {
     public int cantidadUsuarios(){
         return listaUsuarios.size();
     }
+    
+    
+    public boolean borrarUsuarios (String nom, int edad, String email, String password){
+        Usuario nuevoUsu = new Usuario(nom, edad, email, password);
+        this.bdUsu.borrar(nuevoUsu);
+        return true;
+    }
+    
+   
 }
  

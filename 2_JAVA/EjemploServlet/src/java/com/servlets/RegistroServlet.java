@@ -77,12 +77,7 @@ public class RegistroServlet extends HttpServlet {
             
             if(camposOk){
                 ServicioUsuarios su = ServicioUsuarios.getInstancia();
-                /*if (su == null)
-                    su = new ServicioUsuarios();*/
                 su.addUsuario(nombre, iEdad, email, password);
-               
-                out.println("<h2>Usuario añadido. Total = "
-                            + su.cantidadUsuarios() + "</h2>");
                
             }
 
