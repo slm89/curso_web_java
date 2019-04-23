@@ -33,11 +33,20 @@ public class ServicioUsuarios {
     private final ArrayList<Usuario> listaUsuarios;
 
    
-    public boolean addUsuario(String nom, int edad, String email, String password){
-        Usuario nuevoUsu = new Usuario(nom, edad, email, password);
-        this.listaUsuarios.add(nuevoUsu);
-        this.bdUsu.crear(nuevoUsu);
-        return true;
+    public boolean addUsuario(String nom, int edad, String email, String password) {
+        try {
+            if (nom.equals("") || email.equals("") || password.equals("")) {
+                return false;
+            }
+            Usuario nuevoUsu = new Usuario(nom, edad, email, password);
+            this.listaUsuarios.add(nuevoUsu);
+            return this.bdUsu.crear(nuevoUsu);
+
+        } catch (Exception ex) {
+            System.err.println("<<<<< Error : No se ha podido crear usuario" + ex.getMessage());
+            return false;
+        }
+        
     }
     
     public boolean validacionPasswd(String email, String passwd){
