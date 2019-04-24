@@ -1,4 +1,3 @@
-
 package com.modelo;
 
 import java.util.ArrayList;
@@ -8,76 +7,104 @@ import java.util.ArrayList;
  * @author Formacion
  */
 public class ServicioUsuarios {
-    
+
     //Implementando Singleton
-    
     private static ServicioUsuarios instancia = null;
-    
-    
+
     //Nadie puede hacer new salvo esta misma clase
     private ServicioUsuarios() {
         //listaUsuarios = new ArrayList<>();
         this.bdUsu = new DerbyDBUsuario();
         this.listaUsuarios = bdUsu.listar();
     }
-    
+
     //Unica manera de obtener un objeto en esta clase
-    public static ServicioUsuarios getInstancia(){
-        if(instancia == null)
+    public static ServicioUsuarios getInstancia() {
+        if (instancia == null) {
             instancia = new ServicioUsuarios();
+        }
         return instancia;
     }
-    
+
     //Código de la clase
     private DerbyDBUsuario bdUsu;
-    private final ArrayList<Usuario> listaUsuarios;
+    private ArrayList<Usuario> listaUsuarios;
+    
+    public ArrayList<Usuario> listar() {
+        return this.listaUsuarios;
+    }
 
-   
-    public boolean addUsuario(String nom, int edad, String email, String password) {
+
+    public boolean addUsuario(String nombre, String edad, String email, String password) {
         try {
-            if (nom.equals("") || email.equals("") || password.equals("")) {
+            if (nombre.equals("") || edad.equals("") || email.equals("") || password.equals("")) {
                 return false;
+            } else {
+                int iEdad = Integer.parseInt(edad);
+                Usuario nuevoUsu = new Usuario(null, nombre, iEdad, email, password);
+                boolean creado = this.bdUsu.crear(nuevoUsu);
+                this.listaUsuarios = bdUsu.listar();
+                return this.listaUsuarios != null && creado;
             }
-            Usuario nuevoUsu = new Usuario(nom, edad, email, password);
-            this.listaUsuarios.add(nuevoUsu);
-            return this.bdUsu.crear(nuevoUsu);
 
         } catch (Exception ex) {
             System.err.println("<<<<< Error : No se ha podido crear usuario" + ex.getMessage());
             return false;
         }
-        
+
     }
-    
-    public boolean validacionPasswd(String email, String passwd){
-        for(Usuario usu : listaUsuarios){
-            if (usu.getEmail().equals(email) && usu.getPassword().equals(passwd)){
+
+    public boolean validacionPasswd(String email, String passwd) {
+        for (Usuario usu : listaUsuarios) {
+            if (usu.getEmail().equals(email) && usu.getPassword().equals(passwd)) {
                 return true;
             }
-        }return false;
+        }
+        return false;
     }
-    
-    public int cantidadUsuarios(){
+
+    public int cantidadUsuarios() {
         return listaUsuarios.size();
     }
     
     
-    public boolean borrarUsuarios (String nom, int edad, String email, String password){
-        Usuario nuevoUsu = new Usuario(nom, edad, email, password);
-        this.bdUsu.borrar(nuevoUsu);
-        return true;
+
+    public boolean modificarUsuario(String id, String nom, String edad, String email, String password) {
+        try {
+            if (id.equals("") || nom.equals("") || edad.equals("") || email.equals("") || password.equals("")) {
+                return false;
+            } else {
+                Integer iId = Integer.parseInt(id);
+                int iEdad = Integer.parseInt(edad);
+                Usuario nuevoUsu = new Usuario(iId, nom, iEdad, email, password);
+                boolean modificado = this.bdUsu.modificar(nuevoUsu);
+                this.listaUsuarios = bdUsu.listar();
+                return this.listaUsuarios != null && modificado;
+            }
+
+        } catch (Exception ex) {
+            System.err.println("<<<<< Error : No se ha podido modificar usuario" + ex.getMessage());
+            return false;
+        }
+
     }
+
     
-    public boolean modifyUser(String nom, String passwd, int edad, String email){
-        Usuario nuevoUsu = new Usuario(nom, edad, email, passwd);
-        this.bdUsu.modificar(nuevoUsu);
-        return true;
-    }
-    
-  
-     public ArrayList<Usuario> listar (){
-         return this.listaUsuarios;
-     }
-   
+    public boolean eliminarUsuario(String id) {
+        try {
+            if (id.equals("") ) {
+                return false;
+            } else {
+                Integer iId = Integer.parseInt(id);;
+                Usuario nuevoUsu = new Usuario(iId);
+                boolean eliminado = this.bdUsu.eliminar(iId);
+                this.listaUsuarios = bdUsu.listar();
+                return this.listaUsuarios != null && eliminado;
+            }
+
+        } catch (Exception ex) {
+            System.err.println("<<<<< Error : No se ha podido eliminar usuario" + ex.getMessage());
+            return false;
+        }
+    }  
 }
- 

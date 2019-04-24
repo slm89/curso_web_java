@@ -1,14 +1,12 @@
 
-
-
 <%@page import="com.modelo.Usuario"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.modelo.ServicioUsuarios"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@include file = "head.jsp" %>
-<% ArrayList<Usuario> listaUsu = ServicioUsuarios.getInstancia().listar();%>
 
+<% ArrayList<Usuario> listaUsu = ServicioUsuarios.getInstancia().listar();%>
 
 <html>
     <%= head() %>
@@ -18,7 +16,7 @@
        
         <table>
             <thead>
-            <th>Nombre</th>
+            <th>Nombre<<<<<<------------------------->>>>>></th>
             <th>Email</th>
         </thead>
         <tbody>
@@ -34,6 +32,6 @@
             %>
 
         </tbody>
-    </table>
-</body>
+        </table>
+    </body>
 </html>

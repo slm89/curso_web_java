@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Formacion
+ * @author German
  */
 public class UsuariosController extends HttpServlet {
 
@@ -33,16 +33,29 @@ public class UsuariosController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 
-            String nombre = request.getParameter("nom");
-            int edad = Integer.parseInt("eda");
-            String email = request.getParameter("email");
-            String password = request.getParameter("passwd");
+            String accion = request.getParameter("accion");
 
-            boolean realizado = ServicioUsuarios.getInstancia().addUsuario(nombre, edad, email, password);
-            if (realizado) {
-                out.println("<h3>Registrado correctamente</h3>");
-            } else {
-                out.println("<h3>No se ha registrado</h3>");
+            String nombre = request.getParameter("nombre");
+            String email = request.getParameter("email");
+            String edad = request.getParameter("edad");
+            String password = request.getParameter("password");
+
+            switch (accion) {
+                case "login":
+                    if (ServicioUsuarios.getInstancia().validacionPasswd(email, password)) {
+                        out.println("<h3>Login correcto</h3>");
+                    } else {
+                        out.println("<h3>Login incorrecto</h3>");
+                    }
+                    break;
+                case "registro":
+                    boolean realizado = ServicioUsuarios.getInstancia().addUsuario(nombre, edad, email, password);
+                    if (realizado) {
+                        out.println("<h3>Registrado correctamente</h3>");
+                    } else {
+                        out.println("<h3>No se ha Registrado</h3>");
+                    }
+                    break;
             }
         }
     }
