@@ -26,6 +26,16 @@
     </c:if>
 </nav>
 
+<c:if test="${sessionScope.msj_error != null}">
+    <h3 style="color: orange"> ${sessionScope.msj_error} </h3>
+    <c:remove var="msj_error" scope="session"/>
+    <!-- request.getSession().removeAtributte("msj_error");-->
+</c:if>
+
+
+
+
+
 <%--EJEMPLO DE JSP Y JSLT
 <%-- Así en JSP
 
