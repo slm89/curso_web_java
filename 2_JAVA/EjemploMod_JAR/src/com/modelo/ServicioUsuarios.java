@@ -67,7 +67,9 @@ public class ServicioUsuarios {
         return listaUsuarios.size();
     }
     
-    
+    public Usuario obtenerUno (String email){
+        return this.bdUsu.obtenerUno(email);
+    }
 
     public boolean modificarUsuario(String id, String nom, String edad, String email, String password) {
         try {
